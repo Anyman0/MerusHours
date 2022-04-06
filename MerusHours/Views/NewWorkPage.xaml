@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MerusHours.Views.NewWorkPage"
+             Routing.Route="NewWorkPage" BackgroundColor="BurlyWood">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Work Name" FontSize="Medium" />
+            <Entry x:Name="WorkEntry" Placeholder="Name of work ie.'W02442'" FontSize="Medium" />
+            <Label Text="Description" FontSize="Medium" />
+            <Editor x:Name="EditorEntry" Placeholder="Description of work" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

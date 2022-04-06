@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MerusHours.Views.Activities"
+             Shell.PresentationMode="ModalAnimated"
+             xmlns:model="clr-namespace:MerusHours.Models"
+             Title="Activities" BackgroundColor="BurlyWood">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Command="{Binding NewActivityCommand}"></ToolbarItem>
+        <ToolbarItem Text="Modify" Command="{Binding ModifyActivityCommand}"></ToolbarItem>
+        <ToolbarItem Text="Delete" Command="{Binding DeleteActivityCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Silver"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Orange"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <CollectionView Margin="20" x:Name="ActivityCollection" SelectionMode="Single" SelectionChanged="ActivityCollection_SelectionChanged">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="10,10,10,10" x:DataType="model:ActivitiesModel">
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="NameLabel" Text="{Binding ActivityName}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                        <Label x:Name="DescriptionLabel" Text="{Binding ActivityDescription}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

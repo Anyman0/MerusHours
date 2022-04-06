@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:MerusHours.Models"
+             x:Class="MerusHours.Views.MainPage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="BurlyWood">
+            <StackLayout>
+                <Image Source="meruspower.png" Opacity="1" VerticalOptions="Start" Margin="0,0,0,30"></Image>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
+                    <Picker x:Name="WorkPicker" Title="Pick Work" FontSize="20" FontAttributes="Bold"></Picker>
+                    <Picker x:Name="ProjectPicker" Title="Pick Project" FontSize="20" FontAttributes="Bold"></Picker>
+                    <Picker x:Name="ActivityPicker" Title="Pick Activity" FontSize="20" FontAttributes="Bold"></Picker>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Button x:Name="BeginWorkButton" Text="Start Work" BackgroundColor="ForestGreen" Command="{Binding BeginCommand}"></Button>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Margin="0,0,0,0" Padding="0,10,0,10">
+                    <CollectionView x:Name="InProgressCollection" Margin="0,0,0,0" SelectionMode="None" BackgroundColor="Silver" HeightRequest="180">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10,10,0,0" x:DataType="model:HoursModel">
+                                    <StackLayout Orientation="Vertical"  Margin="0,5,0,10">
+                                        <Label Text="Work:" VerticalOptions="End" HorizontalOptions="Start" FontSize="16" FontAttributes="Bold"></Label>
+                                        <Label Text="Project:" VerticalOptions="End" HorizontalOptions="Start" FontSize="16" Padding="0,5,0,0" FontAttributes="Bold"></Label>
+                                        <Label Text="Activity:" VerticalOptions="End" HorizontalOptions="Start" FontSize="16" Padding="0,5,0,0" FontAttributes="Bold"></Label>
+                                        <Label Text="Day:" VerticalOptions="End" HorizontalOptions="Start" FontSize="16" Padding="0,5,0,0" FontAttributes="Bold"></Label>
+                                        <Label Text="Date:" VerticalOptions="End" HorizontalOptions="Start" FontSize="16" Padding="0,5,0,0" FontAttributes="Bold"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                        <StackLayout Orientation="Horizontal"></StackLayout>
+                                        <Label x:Name="nameLabel" Text="{Binding WorkName}" FontSize="16" VerticalOptions="Center" Padding="0,0,0,0" HorizontalOptions="Start"></Label>
+                                        <Label x:Name="projectLabel" Text="{Binding ProjectName}" FontSize="16" VerticalOptions="Center" Padding="0,5,0,0" HorizontalOptions="Start"></Label>
+                                        <Label x:Name="activityLabel" Text="{Binding ActivityName}" FontSize="16" VerticalOptions="Center" Padding="0,5,0,0" HorizontalOptions="Start"></Label>
+                                        <Label x:Name="dayLabel" Text="{Binding Day}" FontSize="16" VerticalOptions="Center" Padding="0,5,0,0" HorizontalOptions="Start"></Label>
+                                        <Label x:Name="weekLabel" Text="{Binding Date}" FontSize="16" VerticalOptions="Center" Padding="0,5,0,0" HorizontalOptions="Start"></Label>
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" VerticalOptions="Start">
+                    <Button x:Name="ScanWorkButton" Text="Scan Work" BackgroundColor="SeaGreen"  Command="{Binding ScanCommand}"></Button>
+                    <Button x:Name="FinishDayButton" Text="Finish Day" BackgroundColor="DarkSeaGreen"  Command="{Binding FinishCommand}"></Button>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

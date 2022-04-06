@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MerusHours.Views.NewHourPage"
+             Routing.Route="NewHourPage" BackgroundColor="BurlyWood">
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker x:Name="WorkPicker" Title="Pick Work" FontSize="20" FontAttributes="Bold"></Picker>
+            <Picker x:Name="ProjectPicker" Title="Pick Project" FontSize="20" FontAttributes="Bold"></Picker>
+            <Picker x:Name="ActivityPicker" Title="Pick Activity" FontSize="20" FontAttributes="Bold"></Picker>
+            <DatePicker x:Name="DatePicker" Format="dddd : dd.MM.yyyy" FontSize="20" FontAttributes="Bold"></DatePicker>
+            <Picker x:Name="HoursPicker" Title="Hours worked on this" FontAttributes="Bold"></Picker>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

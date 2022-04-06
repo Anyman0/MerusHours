@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:MerusHours.Models"
+             x:Class="MerusHours.Views.Hours"
+             Shell.PresentationMode="ModalAnimated">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Command="{Binding NewHourCommand}"></ToolbarItem>
+        <ToolbarItem Text="Modify" Command="{Binding ModifyHourCommand}"></ToolbarItem>
+        <ToolbarItem Text="Delete" Command="{Binding DeleteHourCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Silver"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Orange"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <Image Source="meruspower.png" Opacity="1" VerticalOptions="Start" Margin="0,0,0,0"></Image>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="0,0,0,0">
+                    <Picker x:Name="SearchByPicker" Title="Search By" SelectedIndexChanged="SearchByPicker_SelectedIndexChanged" HorizontalTextAlignment="Center">
+                    </Picker>
+                    <Picker x:Name="SearchDefinitionPicker" Title="Definition" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"></Picker>
+                    <DatePicker x:Name="SearchDatePicker" HorizontalOptions="End" Format="dddd : dd.MM.yyyy" IsVisible="false"></DatePicker>
+                    <Button x:Name="StartSearchButton" Text="Search" BackgroundColor="BlanchedAlmond" Clicked="StartSearchButton_Clicked"></Button>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Margin="0,280,0,0" BackgroundColor="BurlyWood">
+                <ScrollView>
+                    <FlexLayout JustifyContent="Start" Wrap="Wrap" Padding="0,0,0,0">
+                        <!--<StackLayout HorizontalOptions="Start" BackgroundColor="AliceBlue" Margin="0,0,10,0">
+                            <Label Text="WorkName" Padding="0,0,10,0"></Label>
+                            <Label Text="ProjectName" Padding="0,0,10,0"></Label>
+                            <Label Text="ActivityName" Padding="0,0,10,0"></Label>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="Start" BackgroundColor="AliceBlue" Margin="10,0,10,0">
+                            <Label Text="WorkName" Padding="0,0,10,0"></Label>
+                            <Label Text="ProjectName" Padding="0,0,10,0"></Label>
+                            <Label Text="ActivityName" Padding="0,0,10,0"></Label>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="Start" BackgroundColor="AliceBlue" Margin="10,0,10,0">
+                            <Label Text="WorkName" Padding="0,0,10,0"></Label>
+                            <Label Text="ProjectName" Padding="0,0,10,0"></Label>
+                            <Label Text="ActivityName" Padding="0,0,10,0"></Label>
+                        </StackLayout>-->                        
+                        <CollectionView Margin="0" x:Name="HoursCollection" SelectionMode="Single" SelectionChanged="HoursCollection_SelectionChanged">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="0,5,0,10" x:DataType="model:HoursModel">
+                                        <StackLayout Orientation="Horizontal" BackgroundColor="DarkKhaki">
+                                            <Label x:Name="NameLabel" Text="{Binding WorkName}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                            <Label x:Name="ProjectLabel" Text="{Binding ProjectName}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                            <Label x:Name="ActivityLabel" Text="{Binding ActivityName}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                            <Label x:Name="TimeLabel" Text="{Binding Hours}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                            <Label x:Name="DayLabel" Text="{Binding Day}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                            <Label x:Name="DateLabel" Text="{Binding Date}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                        </StackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </FlexLayout>
+                </ScrollView>
+            </StackLayout>
+
+            <!--<CollectionView Margin="20" x:Name="HoursCollection" SelectionMode="Single" SelectionChanged="HoursCollection_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" x:DataType="model:HoursModel">
+                            <StackLayout Orientation="Vertical">
+                                <Label x:Name="NameLabel" Text="{Binding WorkName}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                <Label x:Name="ProjectLabel" Text="{Binding ProjectName}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                <Label x:Name="ActivityLabel" Text="{Binding ActivityName}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                <Label x:Name="TimeLabel" Text="{Binding Hours}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                <Label x:Name="DayLabel" Text="{Binding Day}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                <Label x:Name="DateLabel" Text="{Binding Date}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

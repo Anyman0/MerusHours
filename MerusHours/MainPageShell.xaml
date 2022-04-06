@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MerusHours.Views"  
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="MerusHours.MainPageShell">
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="MainPage">
+            <ShellContent Title="MainPage" Route="MainPage" ContentTemplate="{DataTemplate views:MainPage}"></ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Works">
+            <ShellContent Title="Works" Route="Works" ContentTemplate="{DataTemplate views:Works}" ></ShellContent>
+            <ShellContent Title="Projects" Route="Projects" ContentTemplate="{DataTemplate views:Projects}"></ShellContent>
+            <ShellContent Title="Activities" Route="Activities" ContentTemplate="{DataTemplate views:Activities}"></ShellContent>
+        </Tab> 
+    </FlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Hours">
+            <ShellContent Title="Hours" Route="Hours" ContentTemplate="{DataTemplate views:Hours}"></ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Scan">
+            <ShellContent Title="Scan" Route="ScanPage" ContentTemplate="{DataTemplate views:ScanPage}"></ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <Label Text="MerusHours"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMMM dd, yyyy}'}"
+                       TextColor="Black"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+    
+</Shell>
