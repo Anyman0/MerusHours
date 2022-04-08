@@ -23,9 +23,9 @@ namespace MerusHours.Views
         public ObservableCollection<HoursModel> HoursCollection;
         private double[] hourList;
         // Picker data
-        private string PickerWorkName;
-        private string PickerProjectName;
-        private string PickerActivityName;
+        //private string PickerWorkName;
+        //private string PickerProjectName;
+        //private string PickerActivityName;
        
         public Command BeginCommand { get; }
         public Command EndCommand { get; }

@@ -1,4 +1,5 @@
 ﻿using MerusHours.Models;
+using MerusHours.Resources;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,7 +19,7 @@ namespace MerusHours.Views
         public Command SaveCommand { get; }
 
         private int ChosenHourID;
-        private string[] ListOfHours;
+        //private string[] ListOfHours;
         public ModifyHourPage(int HourID)
         {
             InitializeComponent();
@@ -58,9 +59,9 @@ namespace MerusHours.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            ListOfHours = new string[30] {"0.25", "0.5", "0.75" , "1" , "1.25" , "1.5" , "1.75" , "2" , "2.25" , "2.5", "2.75", "3" , "3.25" , "3.5" , "3.75",
-                                           "4", "4.25", "4.5", "4.75", "5", "5.25", "5.5", "5.75", "6", "6.25", "6.5", "6.75", "7", "7.25", "7.5"};
-            HoursPicker.ItemsSource = ListOfHours;
+            /*ListOfHours = new string[30] {"0.25", "0.5", "0.75" , "1" , "1.25" , "1.5" , "1.75" , "2" , "2.25" , "2.5", "2.75", "3" , "3.25" , "3.5" , "3.75",
+                                           "4", "4.25", "4.5", "4.75", "5", "5.25", "5.5", "5.75", "6", "6.25", "6.5", "6.75", "7", "7.25", "7.5"};*/
+            HoursPicker.ItemsSource = SharedResources.Hours.Split(',');
             await GetChosenHour(ChosenHourID);
         }
 

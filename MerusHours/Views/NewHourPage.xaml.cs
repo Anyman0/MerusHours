@@ -1,4 +1,5 @@
 ﻿using MerusHours.Models;
+using MerusHours.Resources;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace MerusHours.Views
         public ObservableCollection<string> WorkCollection;
         public ObservableCollection<string> ProjectCollection;
         public ObservableCollection<string> ActivityCollection;
-        private string[] hourList;
+        //private string[] hourList;
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
         public NewHourPage()
@@ -26,8 +27,8 @@ namespace MerusHours.Views
             WorkCollection = new ObservableCollection<string>();
             ProjectCollection = new ObservableCollection<string>();
             ActivityCollection = new ObservableCollection<string>();
-            hourList = new string[32] {"0.25", "0.5", "0.75" , "1" , "1.25" , "1.5" , "1.75" , "2" , "2.25" , "2.5", "2.75", "3" , "3.25" , "3.5" , "3.75",
-                                           "4", "4.25", "4.5", "4.75", "5", "5.25", "5.5", "5.75", "6", "6.25", "6.5", "6.75", "7", "7.25", "7.5", "7.75", "8"};
+            /*hourList = new string[32] {"0.25", "0.5", "0.75" , "1" , "1.25" , "1.5" , "1.75" , "2" , "2.25" , "2.5", "2.75", "3" , "3.25" , "3.5" , "3.75",
+                                           "4", "4.25", "4.5", "4.75", "5", "5.25", "5.5", "5.75", "6", "6.25", "6.5", "6.75", "7", "7.25", "7.5", "7.75", "8"};*/
             SaveCommand = new Command(SaveHour);
             CancelCommand = new Command(Cancel);
             BindingContext = this;
@@ -41,16 +42,16 @@ namespace MerusHours.Views
         private async void SaveHour(object obj)
         {
             var hourModel = new HoursModel();
-            hourModel.WorkName = WorkPicker.SelectedItem.ToString();
-            hourModel.ProjectName = ProjectPicker.SelectedItem.ToString();
-            hourModel.ActivityName = ActivityPicker.SelectedItem.ToString();
-            hourModel.Hours = HoursPicker.SelectedItem.ToString();
-            hourModel.Date = DatePicker.Date.ToString("dd/MM/yyyy");
-            hourModel.Day = DatePicker.Date.ToString("dddd");
-            hourModel.InProgress = false;
-
-            if(hourModel.WorkName != null || hourModel.ProjectName != null)
+            
+            if(WorkPicker.SelectedItem.ToString() != null || ProjectPicker.SelectedItem.ToString() != null)
             {
+                if(WorkPicker.SelectedItem != null) hourModel.WorkName = WorkPicker.SelectedItem.ToString();
+                if (ProjectPicker.SelectedItem != null) hourModel.ProjectName = ProjectPicker.SelectedItem.ToString();
+                if (ActivityPicker.SelectedItem != null) hourModel.ActivityName = ActivityPicker.SelectedItem.ToString();
+                if (HoursPicker.SelectedItem != null) hourModel.Hours = HoursPicker.SelectedItem.ToString();
+                hourModel.Date = DatePicker.Date.ToString("dd/MM/yyyy");
+                hourModel.Day = DatePicker.Date.ToString("dddd");
+                hourModel.InProgress = false;
                 await App.HoursDatabase.SaveHourAsync(hourModel);
                 await Shell.Current.GoToAsync("..");
             }
@@ -90,7 +91,7 @@ namespace MerusHours.Views
             WorkPicker.ItemsSource = WorkCollection;
             ProjectPicker.ItemsSource = ProjectCollection;
             ActivityPicker.ItemsSource = ActivityCollection;
-            HoursPicker.ItemsSource = hourList;
+            HoursPicker.ItemsSource = SharedResources.Hours.Split(',');
         }
     }
 }
